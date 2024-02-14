@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Controller</title>
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            body {
+                background: #272727;
+                height: 100vh;
+            }
+
+            button {
+                aspect-ratio: 1 / 1;
+            }
+
+            .info-panel {
+                background: red;
+                opacity: 0.5;
+            }
+
+            .container {
+                padding: 30px;
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                grid-template-rows: 1fr;
+                background-color: green;
+                gap: 2%;
+            }
+
+            .move-buttons {
+                display: grid;
+                background-color: pink;
+                grid-template-columns: repeat(3, 1fr);
+                grid-template-rows: repeat(3, 33%);
+            }
+
+            button {
+                color: white;
+                font-size: 2em;
+                background: purple;
+                outline: none;
+                border: 4px solid purple;
+                border-radius: 50%;
+            }
+            
+            button:active {
+                background-color: red;
+            }
+
+            #btn-left {
+                grid-column: 1;
+                grid-row: 2;
+            }
+
+            #btn-right {
+                grid-column: 3;
+                grid-row: 2;
+            }
+
+            #btn-turn-left {
+                grid-column: 2;
+                grid-row: 1;
+            }
+
+            #btn-turn-right {
+                grid-column: 2;
+                grid-row: 3;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="move-buttons">
+                <button id="btn-turn-left">Turn left</button>
+                <button id="btn-turn-right">Turn right</button>
+                <button onclick="sendCommand({'type': 'move', 'side': 'left'})" id="btn-left">Left</button>
+                <button onclick="sendCommand({'type': 'move', 'side': 'right'})" id="btn-right">Right</button>
+            </div>
+            <div class="info-panel">
+                <span>Score: 1293</span>
+            </div>
+        </div>
+    </body>
+</html>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.4/socket.io.js" integrity="sha512-tE1z+95+lMCGwy+9PnKgUSIeHhvioC9lMlI7rLWU0Ps3XTdjRygLcy4mLuL0JAoK4TLdQEyP0yOl/9dMOqpH/Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+    const socket = io("http://192.168.15.2:8765/");
+    socket.on('connect', (event) => {
+        console.log('Conectado com sucesso!');
+    });
+    
+    socket.on('error', (error) => {
+        console.log(error)
+    });
+
+
+    function sendCommand(command) {
+        socket.emit('command', command);
+    }
+
+</script>
