@@ -13,32 +13,18 @@
             font-size: 64px;
             color: white;
             position: relative;
-            /* Added position relative */
         }
 
         canvas {
             border: 1px solid white;
-            width: 3072px;
-            height: 1920px;
-        }
-
-        canvas::before {
-            content: 'hello';
-        }
-
-        canvas::after {
-            content: 'fhsafihasudihasd';
-            display: block;
-            position: absolute;
-            width: 1920px;
-            height: 1920px;
-            background: red;
+            width: calc(3072px / 2);
+            height: calc(1920px / 2);
         }
     </style>
 </head>
 
 <body>
-    <canvas width="3072" height="1920" id="game"></canvas>
+    <canvas width="1536" height="960" id="game"></canvas>
     <script>
         // https://tetris.fandom.com/wiki/Tetris_Guideline
         let gbRows = 30;
@@ -173,7 +159,7 @@
 
         const canvas = document.getElementById('game');
         const context = canvas.getContext('2d');
-        const grid = 64;
+        const grid = 64 / 2;
         const tetrominoSequence = [];
 
         // keep track of what is in every cell of the game using a 2d array
@@ -283,9 +269,8 @@
                 for (let row = 0; row < tetromino.matrix.length; row++) {
                     for (let col = 0; col < tetromino.matrix[row].length; col++) {
                         if (tetromino.matrix[row][col]) {
-
                             // drawing 1 px smaller than the grid creates a grid effect
-                            context.fillRect((tetromino.col + col) * grid, (tetromino.row + row) * grid, grid - 5, grid - 5);
+                            context.fillRect((tetromino.col + col) * grid, (tetromino.row + row) * grid, grid - 1, grid - 1);
                         }
                     }
                 }

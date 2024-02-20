@@ -1,0 +1,177 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'VT323';
+}
+
+body {
+    background: #363636;
+    width: 100%;
+    height: 100vh;
+    color: white;
+}
+
+#initial-screen {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 8vw;
+    display: flex;
+    flex-direction: column;
+}
+
+#initial-screen div {
+    padding: 2%;
+    width: 70%;
+    height: 70%;
+    margin: 0 auto;
+    border-radius: 50px;
+    background: rgb(0, 0, 107);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12%;
+}
+
+
+#initial-screen span {
+    font-size: 2vw;
+    animation: pulse 0.3s linear alternate infinite;
+}
+
+input {
+    width: 60%;
+    font-size: 6vw;
+    background: rgba(0, 0, 0, 0);
+    outline: none;
+    border: none;
+    border-bottom: 3px solid orangered;
+    text-align: center;
+    color: white;
+}
+
+button {
+    width: 60%;
+    font-size: 3vw;
+    background: orangered;
+    color: white;
+    outline: none;
+}
+
+button:active {
+    filter: brightness(90%);
+}
+
+@keyframes pulse {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+/* Controls */
+
+.controller {
+    width: 100%;
+    height: 100%;
+    background: white;
+    padding: 2em;
+}
+
+.control {
+    height: 100%;
+    background: #343434;
+    padding: 2%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+.joystick {
+    aspect-ratio: 1 / 1;
+    height: 70%;
+    display: grid;
+    grid-template-areas: ". top ."
+    "left center right"
+    ". bottom .";
+    /* filter: drop-shadow(8px 8px 0 white) drop-shadow(-8px -8px 0 white); */
+}
+
+.button-move {
+    background: #1a1a1a;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+    border: 15px solid white;
+    border-bottom: none;
+}
+
+.button-move::after {
+    content: '';
+    position: absolute;
+    bottom: -15px;
+    left: -15px;
+    width: 15px;
+    height: 15px;
+    background-color: white;
+}
+
+.move-left {grid-area: left; transform: rotate(-90deg)}
+.move-right {grid-area: right; transform: rotate(90deg)}
+.move-top {grid-area: top;}
+.move-bottom {grid-area: bottom; transform: rotate(180deg);}
+.move-center {grid-area: center; border: none; z-index: 1;}
+
+.move-center::after {
+    content: none;
+}
+
+.button-move svg {
+    width: 30%;
+    fill: rgba(255, 255, 255, 0.1);
+}
+
+.buttons {
+    height: 30%;
+    display: flex;
+    gap: 3vw;
+    position: relative;
+    transform: translateY(50%);
+}
+
+.button {
+    background: white;
+    height: 100%;
+    aspect-ratio: 1 / 1;
+    padding: 16px;
+    box-shadow: 0 0 10px #000;
+    position: relative;
+}
+
+.button:nth-child(1)::after {
+    content: 'B';
+}
+
+.button:nth-child(2)::after {
+    content: 'A';
+}
+
+.button::after {
+    position: absolute;
+    display: block;
+    font-size: 3vw;
+    color: red;
+    right: 0;
+    bottom: -25%;
+}
+
+.button .circle {
+    border-radius: 100%;
+    height: 100%;
+    background: red;
+    box-shadow: inset 0 0 10px #000, 0 0 3px #000;
+}
