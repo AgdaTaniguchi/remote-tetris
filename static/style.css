@@ -65,6 +65,41 @@ button:active {
     filter: brightness(90%);
 }
 
+#span-name {
+    position: absolute;
+    left: 85%;
+    transform: translateX(-85%);
+    top: 80px;
+    font-size: 48px;
+    color: red;
+}
+
+.middle {
+    height: 100%;
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.box-center {
+    width: 100%;
+    height: 15%;
+    border-radius: 15px;
+    background: gray;
+}
+
+.box-center:nth-child(1) {
+    border-radius: 0 0 15px 15px;
+}
+
+.box-center:nth-last-child(1) {
+    border-radius: 15px 15px 0 0;
+}
+
 @keyframes pulse {
     from {opacity: 0;}
     to {opacity: 1;}
@@ -77,10 +112,12 @@ button:active {
     height: 100%;
     background: white;
     padding: 2em;
+    display: none;
 }
 
 .control {
     height: 100%;
+    position: relative;
     background: #343434;
     padding: 2%;
     display: flex;
@@ -174,4 +211,8 @@ button:active {
     height: 100%;
     background: red;
     box-shadow: inset 0 0 10px #000, 0 0 3px #000;
+}
+
+.btn-interaction:active {
+    filter: brightness(85%);
 }

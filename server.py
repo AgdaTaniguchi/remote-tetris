@@ -17,13 +17,9 @@ def control():
     return render_template('controls.html')
 
 @socketio.on('connect')
-def connect_handler(jogador):
-    from time import time
-    print(jogador)
+def connect_handler():
     global player_count
     player_count += 0
-    id = int(time())
-    emit('connected', id)
 
 @socketio.on('disconnect')
 def disconnect_handler():
@@ -32,7 +28,10 @@ def disconnect_handler():
 @socketio.on('command')
 def command_handler(command):
     print(command)
-    emit('getMessage', command)
+    if command['type'] == 'connected':
+        emit('sendMessageDisplay', {'nick': command['nick'], 'status': 'connected'}, broadcast=True)
+    elif command['type'] == 'movement':
+        emit('sendMessageDisplay', {'nick': command['nick'], 'movement': command['movement']}, broadcast=True)
 
 if __name__ == '__main__':
     socketio.run(app, host='0.0.0.0', port=8765, debug=True)
