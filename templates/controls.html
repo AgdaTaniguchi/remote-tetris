@@ -1,68 +1,66 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Controller</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+        <!-- <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='style.css') }}"> -->
+        <link rel="stylesheet" href="../static/style.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.4/socket.io.js"
+        integrity="sha512-tE1z+95+lMCGwy+9PnKgUSIeHhvioC9lMlI7rLWU0Ps3XTdjRygLcy4mLuL0JAoK4TLdQEyP0yOl/9dMOqpH/Q=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    </head>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Controller</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='style.css') }}">
-    <link rel="stylesheet" href="../static/style.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.4/socket.io.js"
-    integrity="sha512-tE1z+95+lMCGwy+9PnKgUSIeHhvioC9lMlI7rLWU0Ps3XTdjRygLcy4mLuL0JAoK4TLdQEyP0yOl/9dMOqpH/Q=="
-    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-</head>
-
-<body>
-    <div id="initial-screen" class="initial-screen">
-        <div>
-            <label for="name">Enter your name:</label>
-            <input type="text" id="name">
-            <button onclick="joinGame()">Join game</button>
-            <span>Press the button to join</span>
+    <body>
+        <div id="initial-screen" class="initial-screen">
+            <div>
+                <label for="name">Enter your name:</label>
+                <input type="text" id="name">
+                <button onclick="joinGame()">Join game</button>
+                <span>Press the button to join</span>
+            </div>
         </div>
-    </div>
-    <div id="controller-screen" class="controller">
-        <div class="control">
-            <div class="joystick">
-                <div class="btn-interaction button-move move-left" id="joy-left">
-                    <svg viewBox="0 0 26 38" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" clip-rule="evenodd" d="M25.9904 16.5L13 0L0.00962067 16.5H2V38H24V16.5H25.9904Z" />
-                    </svg>
+        <div id="controller-screen" class="controller">
+            <div class="control">
+                <div class="joystick">
+                    <div class="btn-interaction button-move move-left" id="joy-left">
+                        <svg viewBox="0 0 26 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M25.9904 16.5L13 0L0.00962067 16.5H2V38H24V16.5H25.9904Z" />
+                        </svg>
+                    </div>
+                    <div class="btn-interaction button-move move-right" id="joy-right">
+                        <svg viewBox="0 0 26 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M25.9904 16.5L13 0L0.00962067 16.5H2V38H24V16.5H25.9904Z" />
+                        </svg>
+                    </div>
+                    <div class="btn-interaction button-move move-top" id="joy-top">
+                        <svg viewBox="0 0 26 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M25.9904 16.5L13 0L0.00962067 16.5H2V38H24V16.5H25.9904Z" />
+                        </svg>
+                    </div>
+                    <div class="btn-interaction button-move move-bottom" id="joy-bottom">
+                        <svg viewBox="0 0 26 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M25.9904 16.5L13 0L0.00962067 16.5H2V38H24V16.5H25.9904Z" />
+                        </svg>
+                    </div>
+                    <div class="button-move move-center" id="joy-center"></div>
                 </div>
-                <div class="btn-interaction button-move move-right" id="joy-right">
-                    <svg viewBox="0 0 26 38" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" clip-rule="evenodd" d="M25.9904 16.5L13 0L0.00962067 16.5H2V38H24V16.5H25.9904Z" />
-                    </svg>
+                <div class="middle">
+                    <div class="box-center"></div>
+                    <div class="box-center"></div>
+                    <div class="box-center"></div>
+                    <div class="box-center"></div>
                 </div>
-                <div class="btn-interaction button-move move-top" id="joy-top">
-                    <svg viewBox="0 0 26 38" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" clip-rule="evenodd" d="M25.9904 16.5L13 0L0.00962067 16.5H2V38H24V16.5H25.9904Z" />
-                    </svg>
+                <div class="buttons">
+                    <div id="button-a" class="button btn-interaction"><div class="circle"></div></div>
+                    <div id="button-b" class="button btn-interaction"><div class="circle"></div></div>
                 </div>
-                <div class="btn-interaction button-move move-bottom" id="joy-bottom">
-                    <svg viewBox="0 0 26 38" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" clip-rule="evenodd" d="M25.9904 16.5L13 0L0.00962067 16.5H2V38H24V16.5H25.9904Z" />
-                    </svg>
-                </div>
-                <div class="button-move move-center" id="joy-center"></div>
+                <span id="span-name">Liquid Studio</span>
             </div>
-            <div class="middle">
-                <div class="box-center"></div>
-                <div class="box-center"></div>
-                <div class="box-center"></div>
-                <div class="box-center"></div>
-            </div>
-            <div class="buttons">
-                <div id="button-a" class="button btn-interaction"><div class="circle"></div></div>
-                <div id="button-b" class="button btn-interaction"><div class="circle"></div></div>
-            </div>
-            <span id="span-name">Liquid Studio</span>
         </div>
-    </div>
-</body>
-<script src="../static/controls.js"></script>
-
+    </body>
+    <script src="../static/controls.js"></script>
 </html>

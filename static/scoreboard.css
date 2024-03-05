@@ -1,0 +1,40 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'VT323';
+}
+
+body {
+    background-color: #1b1b1b;
+    color: white;
+    font-size: 32px;
+}
+
+#scoreboard {
+    background-color: #262626;
+    padding: 1em;
+    width: calc(1536px / 2);
+    height: calc(1920px / 2);
+}
+
+#scoreboard p {
+    padding: 0.2em 0;
+}
+
+button {
+    position: absolute;
+    top: 50px;
+    right: 1000px;
+    font-size: 0.9em;
+    padding: 4px 8px;
+    background: red;
+    color: white;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+}
+
+.player {
+    position: absolute;
+}

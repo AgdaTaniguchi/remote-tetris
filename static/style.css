@@ -70,7 +70,7 @@ button:active {
     left: 85%;
     transform: translateX(-85%);
     top: 80px;
-    font-size: 48px;
+    font-size: 4vw;
     color: red;
 }
 

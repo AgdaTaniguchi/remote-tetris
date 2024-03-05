@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Scoreboard</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='scoreboard.css') }}">
+        <link rel="stylesheet" href="../static/scoreboard.css">
+    </head>
+    <body>
+        <div id="scoreboard">
+            <div class="player">1. <span id="nickname1"></span> - <span id="score1">0</span> pontos</div>
+            <div class="player">2. <span id="nickname2"></span> - <span id="score2">0</span> pontos</div>
+            <div class="player">3. <span id="nickname3"></span> - <span id="score3">0</span> pontos</div>
+            <div class="player">4. <span id="nickname4"></span> - <span id="score4">0</span> pontos</div>
+        </div>
+        <button onclick="addScore()">Adicionar pontos</button>
+    </body>
+</html>
+
+<script>
+    let players = [
+        {'position': 1, 'nickname': 'Aspas', 'score': 0},
+        {'position': 2, 'nickname': 'Sacy', 'score': 0},
+        {'position': 3, 'nickname': 'Less', 'score': 0},
+        {'position': 4, 'nickname': 'Qck', 'score': 0},
+    ]
+
+    const scoreboard = document.getElementById("scoreboard");
+
+    const playersElements = document.querySelectorAll(".player");
+
+    playersElements.forEach((player, index) => {
+        player.style.top = (index + 1) * 48 + 'px';
+        document.getElementById(`nickname${index + 1}`).innerHTML = players[index].nickname;
+        document.getElementById(`score${index + 1}`).innerHTML = 0;
+    });
+
+    const updateScore = () => {
+        playersElements.forEach((player, index) => {
+            document.getElementById(`score${index + 1}`).innerHTML = players[index].score;
+        });
+        
+        let score = [...players];
+        score = score.sort((playerA, playerB) => playerB.score - playerA.score);
+        
+        if(players[0].nickname !== score[0].nickname) {
+            playersElements[0].style.right = '500px';
+        }
+    }
+
+    const compare = (prevPosition, newPosition) => {
+        return prevPosition - newPosition;
+    }
+
+    const addScore = () => {
+        players[parseInt(Math.random() * 4)].score += parseInt(Math.random() * 50);
+        updateScore();
+    }
+</script>
